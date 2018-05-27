@@ -213,21 +213,17 @@ while (std::getline(read, line))
         char saveName1[50];
         char saveName2[50];
 
-	for (int folder_name = 3893; folder_name < 148093; folder_name++) {
+	for (int folder_name = 1; folder_name < 148093; folder_name++) {
 
 		base_dir = "/home/richard/MFF-pytorch/datasets/jester/rgb/" + std::to_string(folder_name) + "/";
 				
 		destination_folder1 = "/home/richard/MFF-pytorch/datasets/jester/flow/u/" + std::to_string(folder_name) + "/";
 		destination_folder2 = "/home/richard/MFF-pytorch/datasets/jester/flow/v/" + std::to_string(folder_name) + "/";
-		string folderCreateCommand1 = "mkdir " + destination_folder1;
-		string folderCreateCommand2 = "mkdir " + destination_folder2;
-		system(folderCreateCommand1.c_str());
-		system(folderCreateCommand2.c_str());
 		num_frames = countdir(base_dir) - 2; // omit the '.' and '..' dirs
 		cout << "Frame number in the dir '" << base_dir << "' :" << num_frames << endl;
 		
 		for (int fr_index = 2; fr_index <= num_frames; fr_index++) {
-			//cout << fr_index << endl;
+			cout << fr_index << endl;
 			sprintf(newName1, "%05d.jpg", fr_index - 1);
 			sprintf(newName2, "%05d.jpg", fr_index);
 
@@ -250,20 +246,17 @@ while (std::getline(read, line))
 			if (frame0.empty())
 			{
 				cerr << "Can't open image [" << filename1 << "]" << endl;
-				//continue;
 				return -1;
 			}
 			if (frame1.empty())
 			{
 				cerr << "Can't open image [" << filename2 << "]" << endl;
-				//continue;
 				return -1;
 			}
 
 			if (frame1.size() != frame0.size())
 			{
 				cerr << "Images should be of equal sizes" << endl;
-				//continue;
 				return -1;
 			}
 
@@ -387,8 +380,8 @@ while (std::getline(read, line))
 				string name1, name2;
 				name1 = destination_folder1 + saveName1;
 				name2 = destination_folder2 + saveName1;
-				//cout << name1 << endl;
-				//cout << name2 << endl;
+				cout << name1 << endl;
+				cout << name2 << endl;
 
 				imwrite(name1, flowx_n, compression_params);
 				imwrite(name2, flowy_n, compression_params);

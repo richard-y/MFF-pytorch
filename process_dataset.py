@@ -39,14 +39,14 @@ for (filename_input, filename_output) in zip(files_input, files_output):
         line = line.rstrip()
         items = line.split(';')
         folders.append(items[0])
-        idx_categories.append(os.path.join(dict_categories[items[1]]))
+        idx_categories.append(os.path.join(str(dict_categories[items[1]])))
     output = []
     for i in range(len(folders)):
         curFolder = folders[i]
         curIDX = idx_categories[i]
         # counting the number of frames in each video folders
         dir_files = os.listdir(os.path.join('20bn-%s'%dataset_name, curFolder))
-        output.append('%s %d %d'%(curFolder, len(dir_files), curIDX))
+        output.append('%s %d %d'%(curFolder, len(dir_files), int(curIDX)))
         print('%d/%d'%(i, len(folders)))
     with open(filename_output,'w') as f:
         f.write('\n'.join(output))
